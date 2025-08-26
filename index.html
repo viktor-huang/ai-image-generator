@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电商产品图生图工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>电商产品图生图工具</h1>
+            <p class="subtitle">上传产品图片，自动获取URL并生成专业级电商场景图</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="config-section">
+                <div class="section-title">配置选项</div>
+                
+                <div class="config-card upload">
+                    <div class="config-title upload">图片上传</div>
+                    
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">📷</div>
+                        <div class="upload-text">点击选择图片或拖拽到此处</div>
+                        <div class="upload-hint">支持 JPG、PNG 格式，最大 5MB</div>
+                    </div>
+                    <input type="file" id="file-input" accept="image/*">
+                    
+                    <div class="preview-container" id="preview-container">
+                        <img id="image-preview" class="image-preview" alt="图片预览">
+                    </div>
+                    
+                    <div class="upload-status" id="upload-status"></div>
+                </div>
+                
+                <div class="product-input">
+                    <div class="style-title">产品名称：</div>
+                    <input type="text" id="product-name" placeholder="请输入产品名称，如：棉质连衣裙、玻璃茶杯等">
+                </div>
+                
+                <div class="config-grid">
+                    <div class="config-card display">
+                        <div class="config-title display">展示方式</div>
+                        <div class="option-buttons">
+                            <button class="option-btn display active" data-display="flat">平铺展示</button>
+                            <button class="option-btn display" data-display="hanger">衣架悬挂</button>
+                            <button class="option-btn display" data-display="model">模特穿着</button>
+                            <button class="option-btn display" data-display="hold">手持展示</button>
+                            <button class="option-btn display" data-display="stand">支架展示</button>
+                            <button class="option-btn display" data-display="natural">自然放置</button>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card pose">
+                        <div class="config-title pose">摆放姿势</div>
+                        <div class="option-buttons">
+                            <button class="option-btn pose active" data-pose="front">正面展示</button>
+                            <button class="option-btn pose" data-pose="side">侧面展示</button>
+                            <button class="option-btn pose" data-pose="angle">45度角</button>
+                            <button class="option-btn pose" data-pose="folded">折叠摆放</button>
+                            <button class="option-btn pose" data-pose="stacked">堆叠摆放</button>
+                            <button class="option-btn pose" data-pose="hanging">悬挂状态</button>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card scene">
+                        <div class="config-title scene">背景场景</div>
+                        <div class="option-buttons">
+                            <button class="option-btn scene active" data-scene="white">纯白背景</button>
+                            <button class="option-btn scene" data-scene="living">居家客厅</button>
+                            <button class="option-btn scene" data-scene="outdoor">户外公园</button>
+                            <button class="option-btn scene" data-scene="cafe">咖啡馆</button>
+                            <button class="option-btn scene" data-scene="office">办公室</button>
+                            <button class="option-btn scene" data-scene="studio">摄影棚</button>
+                            <button class="option-btn scene" data-scene="beach">海滩</button>
+                            <button class="option-btn scene" data-scene="nature">自然风光</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-card model" id="model-config">
+                    <div class="config-title model">模特属性</div>
+                    
+                    <div class="model-options">
+                        <div class="model-select">
+                            <label>人种</label>
+                            <select id="model-race">
+                                <option value="asian">亚洲黄种人</option>
+                                <option value="caucasian">欧美白人</option>
+                                <option value="african">黑人</option>
+                            </select>
+                        </div>
+                        
+                        <div class="model-select">
+                            <label>性别</label>
+                            <select id="model-gender">
+                                <option value="female">女性</option>
+                                <option value="male">男性</option>
+                            </select>
+                        </div>
+                        
+                        <div class="model-select">
+                            <label>年龄</label>
+                            <select id="model-age">
+                                <option value="young">青年(20-30岁)</option>
+                                <option value="middle">中年(30-40岁)</option>
+                                <option value="mature">成熟(40-50岁)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="model-options">
+                        <div class="model-select">
+                            <label>发型</label>
+                            <select id="model-hair">
+                                <option value="long">长发</option>
+                                <option value="short">短发</option>
+                                <option value="medium">中长发</option>
+                            </select>
+                        </div>
+                        
+                        <div class="model-select">
+                            <label>身材</label>
+                            <select id="model-body">
+                                <option value="slim">苗条</option>
+                                <option value="average">中等</option>
+                                <option value="curvy">丰满</option>
+                            </select>
+                        </div>
+                        
+                        <div class="model-select">
+                            <label>身高</label>
+                            <select id="model-height">
+                                <option value="petite">娇小(160cm以下)</option>
+                                <option value="average">中等(160-170cm)</option>
+                                <option value="tall">高挑(170cm以上)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="advanced-toggle">
+                    <button class="advanced-toggle-btn" id="advanced-toggle">
+                        <span>高级选项</span>
+                        <span class="advanced-toggle-icon">▼</span>
+                    </button>
+                </div>
+                
+                <div class="config-card advanced" id="advanced-config">
+                    <div class="config-title advanced">
+                        <span>高级拍摄设置</span>
+                        <button class="toggle-advanced" id="reset-advanced">重置</button>
+                    </div>
+                    
+                    <div class="advanced-options">
+                        <div class="advanced-select">
+                            <label>构图类型</label>
+                            <select id="composition">
+                                <option value="full-body">全身照</option>
+                                <option value="medium-shot" selected>半身照</option>
+                                <option value="three-quarter">七分照</option>
+                                <option value="close-up">特写</option>
+                                <option value="flat-lay">平铺拍摄</option>
+                                <option value="hanging">挂拍</option>
+                            </select>
+                        </div>
+                        
+                        <div class="advanced-select">
+                            <label>拍摄视角</label>
+                            <select id="angle">
+                                <option value="eye-level" selected>平视</option>
+                                <option value="high-angle">俯视</option>
+                                <option value="low-angle">仰视</option>
+                                <option value="dynamic">动态视角</option>
+                            </select>
+                        </div>
+                        
+                        <div class="advanced-select">
+                            <label>画幅比例</label>
+                            <select id="aspect-ratio">
+                                <option value="portrait">竖版 (2:3)</option>
+                                <option value="square" selected>方版 (1:1)</option>
+                                <option value="landscape">横版 (16:9)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="advanced-options">
+                        <div class="advanced-select">
+                            <label>光线类型</label>
+                            <select id="lighting">
+                                <option value="soft" selected>柔光</option>
+                                <option value="hard">硬光</option>
+                                <option value="natural">自然光</option>
+                                <option value="studio">工作室灯光</option>
+                            </select>
+                        </div>
+                        
+                        <div class="advanced-select">
+                            <label>光线方向</label>
+                            <select id="light-direction">
+                                <option value="front" selected>正面光</option>
+                                <option value="side">侧光</option>
+                                <option value="back">背光</option>
+                                <option value="rim">轮廓光</option>
+                            </select>
+                        </div>
+                        
+                        <div class="advanced-select">
+                            <label>画面风格</label>
+                            <select id="style">
+                                <option value="commercial" selected>商业摄影</option>
+                                <option value="lifestyle">生活方式</option>
+                                <option value="minimalist">极简主义</option>
+                                <option value="vintage">复古风格</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="preview-prompt">
+                    <div class="preview-prompt-title">提示词（可编辑）：</div>
+                    <textarea id="prompt-textarea">产品平铺正面展示在纯白背景，专业摄影棚灯光，高清8K画质，产品细节清晰，无阴影干扰，产品完全保持不变</textarea>
+                    <button class="reset-btn" id="reset-prompt">重置提示词</button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="generate-btn" id="generate-btn" disabled>生成图片</button>
+                    <button class="download-btn" id="download-btn">下载图片</button>
+                </div>
+                
+                <div class="error-message" id="error-message"></div>
+                <div class="success-message" id="success-message"></div>
+            </div>
+            
+            <div class="result-section">
+                <div class="section-title">生成结果</div>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>正在生成图片，请稍候...</p>
+                </div>
+                
+                <div class="preview-container">
+                    <img id="original-preview" class="image-preview" alt="原始图片">
+                    <img id="result-preview" class="image-preview" alt="生成结果">
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 电商产品图生图工具 | 基于 Modelverse API 和 GitHub 图床</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
