@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // GitHub配置
     const githubConfig = {
-        token: "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",
-        owner: "viktor-huang",
+        token: "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",
+        owner: "13476107190",
         repo: "ai",
         branch: "main",
         path: "images/"
@@ -589,3 +589,4 @@ document.addEventListener('DOMContentLoaded', function() {
     updatePrompt();
 
 });
+
