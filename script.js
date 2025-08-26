@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // GitHub配置
     const githubConfig = {
-        token: "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",
+        token: "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",
         owner: "13476107190",
         repo: "ai",
         branch: "main",
@@ -589,4 +589,5 @@ document.addEventListener('DOMContentLoaded', function() {
     updatePrompt();
 
 });
+
 
